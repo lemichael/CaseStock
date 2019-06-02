@@ -1,3 +1,5 @@
-﻿body {
-    background-color: red;
-}
+﻿// Libraries
+@import "~bootstrap/scss/bootstrap";
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
+@import "common.scss";

@@ -45,7 +45,7 @@ module.exports = (env, argv) => {
             new CopyPlugin([
                 { from: "./Assets/Media", to: "Media" },
                 { from: "./Assets/Static", to: "Static" },
-            ]),
+            ])
         ],
 
         module: {
@@ -69,6 +69,7 @@ module.exports = (env, argv) => {
                             }
                         },
                         "css-loader",
+                        "postcss-loader",
                         "sass-loader"
                     ]
                 },

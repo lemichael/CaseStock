@@ -1,15 +1,20 @@
 ﻿$navbar-height: 60px;
+$navbar-sub-height: 50px;
 $sidebar-width: 280px;
 
 @import "colors.scss";
 
 /* Navigation */
+@mixin navbar-shadow {
+    box-shadow: 0 3px 8px -6px transparentize($color-blue, .6);
+    border-bottom: 1px solid gray("300");
+}
+
 nav.navbar {
     @extend .fixed-top, .navbar-expand-md, .navbar-light, .bg-white;
+    @include navbar-shadow;
     transition: box-shadow 1s;
     height: $navbar-height;
-    box-shadow: 0 0 6px 0 transparentize($color-blue, .8);
-    border-bottom: 1px solid gray("300");
 
     &:hover {
         box-shadow: 0 0 6px 0 transparentize($color-blue, .6);
@@ -84,12 +89,93 @@ nav.navbar {
             }
         }
     }
+
+    .dropdown-menu {
+        border: 1px solid $color-green;
+        border-radius: 0;
+
+        a {
+            color: $color-blue;
+
+            &:hover {
+                background: $color-green-light;
+            }
+        }
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+
+        .nav-link {
+            white-space: nowrap;
+        }
+    }
+
+    @include media-breakpoint-down(sm) {
+        #navbar-sections {
+            @include navbar-shadow;
+            position: fixed;
+            top: $navbar-height;
+            left: 0;
+            width: 100%;
+            height: $navbar-sub-height;
+            background: gray("100");
+
+            .navbar-nav {
+                overflow-x: scroll;
+
+                .nav-link {
+                    padding: .25rem;
+                    font-size: .9rem;
+                }
+            }
+        }
+
+        #navbar-control {
+            .nav-link {
+                padding: .25rem;
+            }
+
+            div.user-icon {
+                margin: 2px !important;
+            }
+
+            button.navbar-toggler {
+                padding: .25rem;
+                font-size: .9rem;
+            }
+
+            div.dropdown-menu {
+                position: absolute;
+            }
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        #navbar-sections {
+            position: static;
+            height: initial;
+
+            .navbar-nav {
+                .nav-link {
+                    padding: .5rem .7rem;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
 }
 
 /* Content Container */
 div.content {
     @extend .container-fluid, .row;
-    margin-top: $navbar-height;
+    margin-top: $navbar-height + $navbar-sub-height;
+}
+
+@include media-breakpoint-up(md) {
+    div.content {
+        margin-top: $navbar-height;
+    }
 }
 
 /* Sidebar */

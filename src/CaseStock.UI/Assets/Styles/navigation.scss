@@ -1,0 +1,165 @@
+﻿@import "variables.scss";
+@import "colors.scss";
+
+@mixin navbar-shadow {
+    box-shadow: 0 3px 8px -6px transparentize($color-blue, .6);
+    border-bottom: 1px solid gray("300");
+}
+
+nav.navbar {
+    @extend .fixed-top, .navbar-expand-md, .navbar-light, .bg-white;
+    @include navbar-shadow;
+    transition: box-shadow 1s;
+    height: $navbar-height;
+
+    &:hover {
+        box-shadow: 0 0 6px 0 transparentize($color-blue, .6);
+    }
+
+    a.navbar-brand {
+        color: $color-green-dark;
+
+        &:hover {
+            color: $color-green;
+        }
+
+        & span.name-case {
+            font-weight: bold;
+        }
+    }
+
+    ul.navbar-nav {
+        a.nav-link {
+            @extend .mr-1;
+            display: inline-block;
+            border-radius: 4px;
+            color: $color-blue;
+
+            &:hover {
+                div.user-icon {
+                    border-color: $color-blue;
+                }
+            }
+
+            &:hover, &.active {
+                background: $color-green-light;
+                color: $color-blue-dark;
+            }
+
+            i {
+                color: $color-blue-dark;
+            }
+
+            &#nav-project-picker {
+                background: gray("200");
+                color: gray("600");
+
+                &:hover {
+                    background: gray("300");
+                    color: gray("900");
+                }
+
+                i {
+                    color: gray("900");
+                }
+            }
+
+            &#nav-user {
+                $user-icon-size: 28px;
+                padding-left: calc(#{$user-icon-size} + .5rem + .2rem);
+
+                div.user-icon {
+                    position: absolute;
+                    top: 0px;
+                    bottom: 0px;
+                    left: .5rem;
+                    display: inline-block;
+                    margin: auto;
+                    border-radius: 5px;
+                    width: $user-icon-size;
+                    height: $user-icon-size;
+                    line-height: $user-icon-size;
+                    background: $color-blue-dark;
+                    font-size: 13px;
+                    text-align: center;
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+
+    .dropdown-menu {
+        border: 1px solid $color-green;
+        border-radius: 0;
+
+        a {
+            color: $color-blue;
+
+            &:hover {
+                background: $color-green-light;
+            }
+        }
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+
+        .nav-link {
+            white-space: nowrap;
+        }
+    }
+
+    #navbar-sections {
+        @include media-breakpoint-down(sm) {
+            @include navbar-shadow;
+            position: fixed;
+            top: $navbar-height;
+            left: 0;
+            width: 100%;
+            height: $navbar-sub-height;
+            background: gray("100");
+
+            .navbar-nav {
+                overflow-x: auto;
+
+                .nav-link {
+                    padding: .25rem;
+                    font-size: .9rem;
+                }
+            }
+        }
+
+        @include media-breakpoint-up(md) {
+            position: static;
+            height: initial;
+
+            .navbar-nav {
+                .nav-link {
+                    padding: .5rem .7rem;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-down(sm) {
+        #navbar-control {
+            .nav-link {
+                padding: .25rem;
+            }
+
+            div.user-icon {
+                margin: 2px !important;
+            }
+
+            button.navbar-toggler {
+                padding: .25rem;
+                font-size: .9rem;
+            }
+
+            div.dropdown-menu {
+                position: absolute;
+            }
+        }
+    }
+}
